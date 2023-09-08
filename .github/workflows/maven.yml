@@ -33,4 +33,4 @@ jobs:
 
     # Build the patient_service project
     - name: Build patient_service with Maven
-      run: mvn -B package --file /pom.xml
+      run: mvn -B package --file pom.xml
