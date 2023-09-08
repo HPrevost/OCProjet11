@@ -36,7 +36,7 @@ class P11apiApplicationTests {
 		assertEquals(nomEtabExpected, nomEtabResult);
 
 		Long coordGPSResult = ps.findLit((long) 2, (long) 20).getCoordGPS();
-		assertEquals((long) 27, coordGPSResult);
+		assertEquals(coordGPSExpected, coordGPSResult);
 
 		String refLitEtabResult = ps.findLit((long) 2, (long) 20).getRefLitEtab();
 		assertEquals(refLitEtabExpected, refLitEtabResult);
