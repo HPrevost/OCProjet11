@@ -33,10 +33,10 @@ public class PatientController {
 	// }
 	// http://127.0.0.1:3000/
 	/// -------
+
 	public FindLitResult findLit(@RequestParam(required = true) Long specialiteId,
-			@RequestParam(required = false) Long gpsPosition,
+			@RequestParam(required = true) Long gpsPosition,
 			@RequestParam(defaultValue = "false", required = false, value = "return") Boolean ret) {
-		System.out.println("Spécialité:" + specialiteId);
 		return patientService.findLit(specialiteId, gpsPosition);
 
 	}

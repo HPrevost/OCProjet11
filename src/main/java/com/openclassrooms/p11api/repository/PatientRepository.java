@@ -21,7 +21,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 	 */
 	@Query(value = "select lit.ref_lit_etab as refLitEtab,etablissement.nom_etab as nomEtab,etablissement.coordgpsetab as coordGPS"
 			+ " from lit inner join etablissement on lit.id_etablissement=etablissement.id"
-			+ " where lit.id_specialite=?1 limit 1;", nativeQuery = true)
+			+ " where lit.id_specialite=ifnull(?1,0) order by abs(etablissement.coordgpsetab-ifnull(?2,0)) limit 1;", nativeQuery = true)
 
 	// Long patientId,
 	FindLitResult findLit(Long specialiteId, Long gpsPosition);

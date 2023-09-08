@@ -11,19 +11,26 @@ public class SecurityConfiguration {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+		// CONFIG H2
 		// http.authorizeHttpRequests(
 		// auth ->
 		// auth.requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll())
+
 		// .authorizeHttpRequests(
 		// auth ->
 		// auth.requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).permitAll())
 		// .headers(AbstractHttpConfigurer::disable)
+
 		// .csrf(csrf ->
 		// csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
+
+		// CONFIG POSTMAN
 		http.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().permitAll())
 				.csrf(AbstractHttpConfigurer::disable);
 		return http.build();
 	}
+
 	/*
 	 * @Bean public CorsConfigurationSource corsConfigurationSource() {
 	 * CorsConfiguration configuration = new CorsConfiguration();

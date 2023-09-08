@@ -15,6 +15,7 @@ public class PatientService {
 	private PatientRepository patientRepository;
 
 	public FindLitResult findLit(Long specialiteId, Long gpsPosition) {
+
 		return patientRepository.findLit(specialiteId, gpsPosition);
 	}
 
