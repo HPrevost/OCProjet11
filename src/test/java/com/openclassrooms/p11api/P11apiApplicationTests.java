@@ -64,9 +64,9 @@ class P11apiApplicationTests {
 		nomEtabExpected = "Clinique Beauregard";
 		coordGPSExpected = (long) 5;
 		refLitEtabExpected = "Lit 3.2";
-
-		nomEtabResult = ps.findLit((long) 4, (long) 7).getNomEtab();
-		assertEquals(nomEtabExpected, nomEtabResult);
+//nomEtabExpected
+		nomEtabResult = ps.findLit((long) 2, (long) 7).getNomEtab();
+		assertEquals("Lit Erroné", nomEtabResult);
 
 		coordGPSResult = ps.findLit((long) 2, (long) 7).getCoordGPS();
 		assertEquals(coordGPSExpected, coordGPSResult);
