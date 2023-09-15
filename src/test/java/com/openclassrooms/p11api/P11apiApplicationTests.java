@@ -1,12 +1,16 @@
 package com.openclassrooms.p11api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.openclassrooms.p11api.service.PatientService;
+
+import io.micrometer.common.util.StringUtils;
 
 @SpringBootTest
 class P11apiApplicationTests {
@@ -21,7 +25,9 @@ class P11apiApplicationTests {
 	@Test
 	public void testfindLit() {
 
-		// Specialité = 2, pos GPS =20 **************************
+		// **************************
+		// CAS 1 Sélection du lit le plus proche pour une spécialité donnée
+		// Specialité = 2, position GPS = 20
 		// {
 		// "nomEtab": "La Timone",
 		// "coordGPS": 28,
@@ -41,12 +47,20 @@ class P11apiApplicationTests {
 		String refLitEtabResult = ps.findLit((long) 2, (long) 20).getRefLitEtab();
 		assertEquals(refLitEtabExpected, refLitEtabResult);
 
-		// Specialité = 2, pos GPS =7 *************************
+		String errorMessageResult = ps.findLit((long) 2, (long) 20).getErrorMessage();
+		assertTrue(StringUtils.isBlank(errorMessageResult));
+
+		// **************************
+		// CAS 2 Sélection du lit le plus proche pour la même specialité et une position
+		// GPS différente
+
+		// Spécialité = 2, position GPS = 7 *************************
 		// {
 		// "nomEtab": "Clinique Beauregard",
 		// "coordGPS": 5,
 		// "refLitEtab": "Lit 3.2"
 		// }
+
 		nomEtabExpected = "Clinique Beauregard";
 		coordGPSExpected = (long) 5;
 		refLitEtabExpected = "Lit 3.2";
@@ -59,6 +73,24 @@ class P11apiApplicationTests {
 
 		refLitEtabResult = ps.findLit((long) 2, (long) 7).getRefLitEtab();
 		assertEquals(refLitEtabExpected, refLitEtabResult);
+
+		// **************************
+		// CAS 3 Aucun enregistrement trouvé pour une spécialité non représentée dans le
+		// jeu d'essai
+
+		// Spécialité = 40, position GPS = 7 *************************
+
+		// {
+		// "nomEtab": null,
+		// "coordGPS": null,
+		// "refLitEtab": null,
+		// "erroMessage" : "Aucun lit disponible pour cette spécialité."
+		// }
+
+		assertNull(ps.findLit((long) 40, (long) 7));
+
+		// CAS 4 Paramètres d'entrée incorrects **************************
+
 	}
 
 }
