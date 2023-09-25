@@ -61,8 +61,8 @@ class P11apiApplicationTests {
 		// "refLitEtab": "Lit 3.2"
 		// }
 
-		// nomEtabExpected = "Clinique Beauregard";
-		nomEtabExpected = "Hôpital Test ";
+		nomEtabExpected = "Clinique Beauregard";
+		// nomEtabExpected = "Hôpital Test";
 
 		coordGPSExpected = (long) 5;
 		refLitEtabExpected = "Lit 3.2";
